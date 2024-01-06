@@ -15,8 +15,8 @@ const Register = () => {
             Sign up for free.
           </p>
 
-          <Input label={"Name"} value={name} type="text" setValue={setName}/>
-          <Input label={"Email"} value={email} type="text" setValue={setEmail}/>
+          <Input label={"Name"} value={name} setValue={setName}/>
+          <Input label={"Email"} type="email" value={email} setValue={setEmail}/>
           <Input label={"Password"} value={password} type="password" setValue={setPassword}/>
         </div>
       </div>
