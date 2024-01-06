@@ -5,7 +5,7 @@ interface InputComponentState {
 }
 
 export interface InputComponentProps {
-    type: string,
+    type?: string,
     label: string,  
     setValue: Dispatch<SetStateAction<string>>,
     value: string
