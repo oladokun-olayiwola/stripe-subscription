@@ -1,15 +1,26 @@
 import React, { useState } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const Register = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleClick = () => {
-    console.log(name, email, password);
-     
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault()
+      const {data} = await axios.post("/register", {
+        name, email, password
+      })
+      console.log(data);
+      toast.success("Regisration completed successfully. Please login")
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong please try again.")
+    }
   }
 
   return (
