@@ -12,10 +12,13 @@ const Register = () => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
       e.preventDefault()
-      const {data} = await axios.post("/register", {
+      const {data} = await axios.post("http://localhost:4000/api/register", {
         name, email, password
       })
       console.log(data);
+      if(data.error === true) {
+        toast.error(data.message)
+      }
       toast.success("Regisration completed successfully. Please login")
     } catch (error) {
       console.log(error);
