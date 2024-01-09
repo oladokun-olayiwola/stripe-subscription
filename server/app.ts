@@ -1,10 +1,7 @@
 import express from "express";
-// import multer from "multer";
-// import path from "path";
-import { json } from "body-parser";
 import dotenv from "dotenv";
-import "express-async-errors";
 import cors from "cors"
+import { ConnectDB } from "./db_connection";
 
 dotenv.config();
 
@@ -23,6 +20,7 @@ app.use(
 const PORT = process.env.PORT || 4000;
 
 const start: () => Promise<void> = async () => {
+  await ConnectDB(process.env.Mongo_URI as string)
   try {
     app.listen(PORT, () => {
       console.log(`Listening to your server on port ${PORT} 😎🥰 `);
