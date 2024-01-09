@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors"
 import { ConnectDB } from "./db_connection";
+import AuthRouter from "./routes/auth"
 
 dotenv.config();
 
@@ -16,6 +17,10 @@ app.use(
         origin: [process.env.MONGO_URI as string]
     })
 )
+
+// Routes
+app.use(AuthRouter)
+
 
 const PORT = process.env.PORT || 4000;
 
