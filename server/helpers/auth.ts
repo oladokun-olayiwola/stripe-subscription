@@ -1,21 +1,18 @@
 import bcrypt from "bcrypt";
+import { Hash } from "../interfaces/IRegister";
 
-export const hashPassword = (password) => {
-  return new Promise((resolve, reject) => {
-    bcrypt.genSalt(12, (err, salt) => {
-      if (err) {
-        reject(err);
-      }
-      bcrypt.hash(password, salt, (err, hash) => {
-        if (err) {
-          reject(err);
-        }
-        resolve(hash);
-      });
-    });
-  });
+export const  hashPassword = async (password: string) => {
+
+  try {
+    const salt = await bcrypt.genSalt(12)
+    await bcrypt.hash(password, salt)
+  } catch (error) {
+console.log(error);
+  }
+
+  
 };
 
-export const comparePassword = (password, hashed) => {
+export const comparePassword = ({password, hashed}: Hash) => {
   return bcrypt.compare(password, hashed);
 };
