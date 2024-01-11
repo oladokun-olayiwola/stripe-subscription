@@ -3,11 +3,15 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const Register = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const navigate = useNavigate();
+
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
@@ -15,9 +19,17 @@ const Register = () => {
       const {data} = await axios.post("http://localhost:4000/api/register", {
         name, email, password
       })
-      console.log(data);
       if(data.error === true) {
         toast.error(data.message)
+      }
+      else {
+        setName("");
+        setEmail("");
+        setPassword("");
+        toast.success(
+          `Hey ${data.user.name}. You are part of tema now. Congrats!`
+        );
+        navigate("/login");
       }
       toast.success("Regisration completed successfully. Please login")
     } catch (error) {
