@@ -4,7 +4,7 @@ export interface UserCredentials {
     password: string
 }
 
-export interface Hash {
+export interface PasswordHash {
     password: string,
     hashed: string
 }
