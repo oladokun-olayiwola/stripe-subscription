@@ -5,7 +5,8 @@ export const  hashPassword = async (password: string) => {
 
   try {
     const salt = await bcrypt.genSalt(12)
-    await bcrypt.hash(password, salt)
+    const hashedPassword = await bcrypt.hash(password, salt)
+    return hashedPassword
   } catch (error) {
 console.log(error);
   }
