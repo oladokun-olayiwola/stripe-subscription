@@ -3,18 +3,21 @@ import dotenv from "dotenv";
 import cors from "cors"
 import { ConnectDB } from "./db_connection";
 import AuthRouter from "./routes/auth"
+import axios from "axios";
 
 dotenv.config();
 
 
 const app = express();
 
+// axios.defaults.withCredentials = true;
+
 
 app.use(express.json({limit: "5mb"}));
 
 app.use(
     cors({
-        origin: [process.env.MONGO_URI as string]
+        origin: [process.env.CLIENT_URL as string]
     })
 )
 
