@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { UserCredentials } from '../interfaces/IRegister';
+import { UserCredentials, UserData } from '../interfaces/IRegister';
 import User from '../model/User';
 import { hashPassword, comparePassword } from '../helpers/auth';
 
@@ -43,3 +43,28 @@ export const Register: RequestHandler = async (req, res) => {
     });
   }
 };
+
+export const Login: RequestHandler = async (req, res) => {
+  const {email, password } = req.body
+  const userExists: UserData | null = await User.findOne({email})
+  if(!userExists) {
+    return res.status(400).json({
+      error: true,
+      message: "Email has not been registered"
+    })
+  }
+  
+  const isPasswordMatch = await comparePassword({password, hashed: userExists.password})
+
+  if (!isPasswordMatch) {
+    return res.status(400).json({
+      error: true,
+      message: "Invalid password"
+    })
+  }
+
+  return res.status(200).json({
+    error: false,
+    message: "User logged in successfully "
+  })
+}
