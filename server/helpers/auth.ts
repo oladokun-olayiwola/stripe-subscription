@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { Hash } from "../interfaces/IRegister";
+import { PasswordHash } from "../interfaces/IRegister";
 
 export const  hashPassword = async (password: string) => {
 
@@ -14,6 +14,6 @@ console.log(error);
   
 };
 
-export const comparePassword = ({password, hashed}: Hash) => {
-  return bcrypt.compare(password, hashed);
+export const comparePassword = async ({password, hashed}: PasswordHash) => {
+  return await bcrypt.compare(password, hashed);
 };
