@@ -27,14 +27,14 @@ const Register = () => {
         setEmail("");
         setPassword("");
         toast.success(
-          `Hey ${data.user.name}. You are part of tema now. Congrats!`
+          `Hey ${data.user.name}. You are part of team now. Congrats!`
         );
         navigate("/login");
       }
       toast.success("Regisration completed successfully. Please login")
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      toast.error("Something went wrong please try again.")
+      toast.error(error.message)
     }
   }
 
