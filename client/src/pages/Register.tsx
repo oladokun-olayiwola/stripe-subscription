@@ -19,6 +19,8 @@ const Register = () => {
       const {data} = await axios.post("http://localhost:4000/api/register", {
         name, email, password
       })
+      console.log(data);
+      
       if(data.error === true) {
         toast.error(data.message)
       }
