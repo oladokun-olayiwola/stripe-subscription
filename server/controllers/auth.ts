@@ -31,6 +31,14 @@ export const Register: RequestHandler = async (req, res) => {
 
     const user = await User.create({ name, email, password: hashedPassword });
     const { password: newPass, ...rest } = user;
+
+    if(!user) {
+      return res.json({
+      error: true,
+      message: 'Failed to create user',
+    });
+    }
+
     return res.status(201).json({
       error: false,
       message: 'User created successfully',
@@ -40,8 +48,7 @@ export const Register: RequestHandler = async (req, res) => {
   } catch (err) {
     return res.json({
       error: true,
-      message: 'Failed to create user',
-      err,
+      message: 'Something went wrong',
     });
   }
 };
