@@ -9,22 +9,25 @@ export const Register: RequestHandler = async (req, res) => {
   const { name, email, password }: UserCredentials = req.body;  
   try {
     if (!name) {
-      return res.json({
-        error: 'Name is required',
+      return res.status(400).json({
+        error: true,
+        message: 'Name is required'
       });
     }
     if (!password || password.length < 6) {
-      return res.json({
-        error: 'Password is required and should be 6 characters long',
+      return res.status(400).json({
+        error: true,
+        message: 'Password is required and should be 6 characters long'
       });
     }
     const exist = await User.findOne({ email });
     if (exist) {
-      return res.json({
+      return res.status(400).json({
         error: true,
         message: " User already exists"
       });
     }
+
 
     // hash password
     const hashedPassword = await hashPassword(password);    
