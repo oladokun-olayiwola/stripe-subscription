@@ -15,3 +15,12 @@ export interface UserData {
     password: string,
     email: string
 }
+
+export interface UserResponse {
+    _doc: UserData
+}
+
+export interface UserRequest {
+    password: string,
+    rest: UserResponse
+}
