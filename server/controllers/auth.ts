@@ -2,6 +2,8 @@ import { RequestHandler } from 'express';
 import { UserCredentials, UserData } from '../interfaces/IRegister';
 import User from '../model/User';
 import { hashPassword, comparePassword } from '../helpers/auth';
+import jwt from "jsonwebtoken";
+
 
 export const Register: RequestHandler = async (req, res) => {
   const { name, email, password }: UserCredentials = req.body;  
@@ -63,8 +65,13 @@ export const Login: RequestHandler = async (req, res) => {
     })
   }
 
+  // create signed token
+  const token = jwt.sign({ _id: userExists._id }, process.env.JWT_SECRET as string, {
+    expiresIn: "7d",
+  });
+
   return res.status(200).json({
     error: false,
-    message: "User logged in successfully "
+    message: "User logged in successfully"
   })
 }
