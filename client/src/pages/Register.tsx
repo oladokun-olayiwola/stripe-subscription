@@ -19,8 +19,7 @@ const Register = () => {
       const {data} = await axios.post("http://localhost:4000/api/register", {
         name, email, password
       })
-      console.log(data);
-      
+
       if(data.error === true) {
         toast.error(data.message)
       }
@@ -35,8 +34,7 @@ const Register = () => {
       }
       toast.success("Regisration completed successfully. Please login")
     } catch (error: any) {
-      console.log(error);
-      toast.error(error.message)
+      toast.error(error.response.data.message)
     }
   }
 
