@@ -3,15 +3,11 @@ import dotenv from "dotenv";
 import cors from "cors"
 import { ConnectDB } from "./db_connection";
 import AuthRouter from "./routes/auth"
-import axios from "axios";
 
 dotenv.config();
 
 
 const app = express();
-
-// axios.defaults.withCredentials = true;
-
 
 app.use(express.json({limit: "5mb"}));
 
@@ -31,7 +27,7 @@ const start: () => Promise<void> = async () => {
   await ConnectDB(process.env.Mongo_URI as string)
   try {
     app.listen(PORT, () => {
-      console.log(`Listening to your server on port ${PORT} 😎🥰 `);
+      console.log(`Listening to your server on port ${PORT}`);
     });
   } catch (error) {
     console.log(error);
