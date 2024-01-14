@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Nav />
-      <Toaster toastOptions={{duration: 2000}}/>
+      <Toaster toastOptions={{duration: 3000}}/>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/register" element={<Register />} />
