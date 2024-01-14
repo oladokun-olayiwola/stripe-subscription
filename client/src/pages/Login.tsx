@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
@@ -18,8 +18,6 @@ const Login = () => {
         email,
         password,
       });
-      console.log(data);
-
       if (data.error === true) {
         toast.error(data.message);
       } else {
@@ -27,9 +25,10 @@ const Login = () => {
         setPassword("");
         navigate("/");
       }
-    } catch (err) {
-      console.log(err);
-      toast.error("Something went wrong. Try again");
+    } catch (err: unknown) {
+    if(err instanceof AxiosError && err.response) { 
+        toast.error(err.response.data.message);
+      }
     }
   };
 
@@ -60,7 +59,7 @@ const Login = () => {
               <Button
                 handleClick={handleClick}
                 type="danger"
-                text="Register"
+                text="Login"
                 size="sm"
               />
             </div>
