@@ -18,6 +18,8 @@ const Register = () => {
       e.preventDefault()
       const {data} = await axios.post("http://localhost:4000/api/register", {
         name, email, password
+      }, {
+        withCredentials: true,
       })
 
       if(data.error === true) {
@@ -30,7 +32,7 @@ const Register = () => {
         toast.success(
           `Hey ${data.user.name}. You are part of team now. Congrats!`
         );
-        navigate("/login");
+        navigate("/");
       }
       toast.success("Regisration completed successfully. Please login")
     } catch (error: any) {
