@@ -11,12 +11,13 @@ const Login = () => {
   const navigate = useNavigate()
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    // console.log("email and password", email, password);
     try {
       e.preventDefault();
       const { data } = await axios.post("http://localhost:4000/api/login", {
         email,
         password,
+      }, {
+        withCredentials: true,
       });
       if (data.error === true) {
         toast.error(data.message);
@@ -29,6 +30,9 @@ const Login = () => {
     if(err instanceof AxiosError && err.response) { 
         toast.error(err.response.data.message);
       }
+      // else {
+      //   throw new Error(err)
+      // }
     }
   };
 
