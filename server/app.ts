@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors"
 import { ConnectDB } from "./db_connection";
 import AuthRouter from "./routes/auth"
+import cookieParser from 'cookie-parser'
 
 dotenv.config();
 
@@ -10,10 +11,13 @@ dotenv.config();
 const app = express();
 
 app.use(express.json({limit: "5mb"}));
+app.use(cookieParser())
+
 
 app.use(
     cors({
-        origin: [process.env.CLIENT_URL as string]
+        origin: [process.env.CLIENT_URL as string],
+        credentials: true
     })
 )
 
