@@ -8,7 +8,7 @@ export const  hashPassword = async (password: string) => {
     const hashedPassword = await bcrypt.hash(password, salt)
     return hashedPassword
   } catch (error) {
-console.log(error);
+    throw new Error("Password hash failed")
   }
 
   
