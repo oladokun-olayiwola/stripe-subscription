@@ -1,7 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { isAuthenticated } from '../utils/functions';
+
 
 const Nav = () => {
+  const navigate = useNavigate()
+
+  const logout = () => {
+    navigate("/login")
+  }
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary border">
       <div className="container-fluid">
@@ -12,7 +20,13 @@ const Nav = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
+
+            {
+              "" ? (<li className="nav-item">
+              <span onClick={logout}>
+                Logout
+              </span>
+            </li>) : (<><li className="nav-item">
               <Link className="nav-link" to="/register">
                 Register
               </Link>
@@ -22,6 +36,8 @@ const Nav = () => {
                 Login
               </Link>
             </li>
+            </>)
+            }
           </ul>
         </div>
       </div>
