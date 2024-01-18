@@ -34,7 +34,7 @@ const start: () => Promise<void> = async () => {
       console.log(`Listening to your server on port ${PORT}`);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     process.exit(1);
   }
 };
