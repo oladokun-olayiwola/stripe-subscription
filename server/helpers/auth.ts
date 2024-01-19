@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { PasswordHash } from "../interfaces/IRegister";
+import { Request } from "express"
 
 export const  hashPassword = async (password: string) => {
 
@@ -17,3 +18,12 @@ export const  hashPassword = async (password: string) => {
 export const comparePassword = async ({password, hashed}: PasswordHash) => {
   return await bcrypt.compare(password, hashed);
 };
+
+
+export const isAuthenticated = (req: Request) => {
+    const token = req.cookies.Token
+    if(token) return token
+    console.log(token)
+    return ""
+}
+
