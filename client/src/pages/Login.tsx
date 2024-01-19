@@ -18,21 +18,19 @@ const Login = () => {
         password,
       }, {
         withCredentials: true,
-      });
+      });      
       if (data.error === true) {
         toast.error(data.message);
       } else {
         setEmail("");
         setPassword("");
+        localStorage.setItem("Token", JSON.stringify(data.token))
         navigate("/");
       }
     } catch (err: unknown) {
     if(err instanceof AxiosError && err.response) { 
         toast.error(err.response.data.message);
       }
-      // else {
-      //   throw new Error(err)
-      // }
     }
   };
 
