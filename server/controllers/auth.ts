@@ -125,9 +125,6 @@ export const Login: RequestHandler = async (req, res) => {
   );
   const userObject = (userExists as any).toObject();
   const { password: newPass, ...rest } = userObject;
-
-  console.log(res.getHeaders())
-
   return res.status(200).cookie('Token', token, { maxAge: 900000, httpOnly: true, sameSite: false }).json({
     error: false,
     message: 'User logged in successfully',
