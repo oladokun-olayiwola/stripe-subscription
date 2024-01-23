@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../components/Button";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context";
 
 const Login = () => {
+  const user = useContext(UserContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
@@ -42,7 +44,6 @@ const Login = () => {
           <p className="lead pb-4">
             Access your subscriptions. Anytime. Anywhere.
           </p>
-
           <div className="form-group">
             <Input
               label="Email"
